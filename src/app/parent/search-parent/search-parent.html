@@ -1,0 +1,198 @@
+<div class="modal fade" id="parentSearchModal" tabindex="-1">
+
+    <div class="modal-dialog modal-xl modal-dialog-scrollable modal-fullscreen-sm-down">
+
+        <div class="modal-content">
+
+            <!-- Header -->
+
+            <div class="modal-header bg-primary text-white">
+
+                <h5 class="modal-title">
+                    <i class="bi bi-search"></i>
+                    Parent Search
+                </h5>
+
+                <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal">
+                </button>
+
+            </div>
+
+            <!-- Body -->
+
+            <div class="modal-body">
+
+                <form
+                    [formGroup]="parentSearchForm"
+                    (ngSubmit)="searchParents()">
+
+                    <div class="row g-3 mb-4">
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <label class="form-label">Full Name</label>
+                            <input
+                                class="form-control"
+                                formControlName="fullName"
+                                placeholder="Full Name">
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <label class="form-label">Email</label>
+                            <input
+                                class="form-control"
+                                formControlName="email"
+                                placeholder="Email">
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <label class="form-label">Mobile No</label>
+                            <input
+                                class="form-control"
+                                formControlName="mobileNo"
+                                placeholder="Mobile Number">
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-3">
+                            <label class="form-label">Address</label>
+                            <input
+                                class="form-control"
+                                formControlName="address"
+                                placeholder="Address">
+                        </div>
+
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-center mb-4">
+
+                        <button
+                            class="btn btn-primary"
+                            type="submit">
+
+                            <i class="bi bi-search"></i>
+
+                            Search
+
+                        </button>
+
+                        <button
+                            class="btn btn-secondary"
+                            type="button"
+                            (click)="clearSearch()">
+
+                            <i class="bi bi-arrow-clockwise"></i>
+
+                            Clear
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <!-- Loading -->
+
+                <div *ngIf="loading" class="text-center py-5">
+
+                    <div class="spinner-border text-primary"></div>
+
+                    <div class="mt-2">
+
+                        Loading Parents...
+
+                    </div>
+
+                </div>
+
+                <!-- Table -->
+
+                <div class="table-responsive" *ngIf="!loading">
+
+                    <table class="table table-hover table-bordered align-middle">
+
+                        <thead class="table-primary">
+
+                            <tr>
+
+                                <th>ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Mobile No</th>
+                                <th>Address</th>
+                                <th width="100">Action</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr *ngFor="let p of parents">
+
+                                <td>{{p.id}}</td>
+
+                                <td>{{p.fullName}}</td>
+
+                                <td>{{p.email}}</td>
+
+                                <td>{{p.mobileNo}}</td>
+
+                                <td>{{p.address}}</td>
+
+                                <td>
+
+                                    <button
+                                        class="btn btn-success btn-sm w-100"
+                                        (click)="selectParent(p)">
+
+                                        <i class="bi bi-check-circle"></i>
+
+                                        Select
+
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <!-- Pagination -->
+
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
+
+                    <button
+                        class="btn btn-secondary mb-2 mb-md-0"
+                        (click)="previousPage()">
+
+                        <i class="bi bi-arrow-left"></i>
+
+                        Previous
+
+                    </button>
+
+                    <button
+                        class="btn btn-secondary"
+                        (click)="nextPage()">
+
+                        Next
+
+                        <i class="bi bi-arrow-right"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

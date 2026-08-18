@@ -1,0 +1,46 @@
+<div class="container mt-4">
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Create Parent</h3>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="parentForm" (ngSubmit)="createParent()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3 form-group">
+                            <label class="form-label">Father Name</label>
+                            <input type="text" class="form-control" formControlName="fatherName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3 form-group">
+                            <label class="form-label">Mother Name</label>
+                            <input type="text" class="form-control" formControlName="motherName">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3 form-group">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" formControlName="address">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" type="submit">
+                    <i class="bi bi-pencil-square"></i> Create
+                </button>
+
+                <button class="btn btn-secondary ms-2" routerLink="/students">
+                    Cancel
+                </button>
+            </form>
+        </div>
+    </div>
+
+</div>

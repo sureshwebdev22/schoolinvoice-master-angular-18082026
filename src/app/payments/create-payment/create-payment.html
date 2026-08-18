@@ -1,0 +1,202 @@
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h5>Invoice Payment</h5>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Invoice Details -->
+
+            <div class="row mb-4">
+
+                <div class="col-md-3">
+                    <label class="fw-bold">Invoice No</label>
+                    <input class="form-control"
+                           [value]="invoice.invoiceNumber"
+                           readonly>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="fw-bold">Student</label>
+                    <input class="form-control"
+                           [value]="invoice.studentName"
+                           readonly>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="fw-bold">Total</label>
+                    <input class="form-control"
+                           [value]="invoice.totalAmount"
+                           readonly>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="fw-bold">Paid</label>
+                    <input class="form-control"
+                           [value]="invoice.paidAmount"
+                           readonly>
+                </div>
+
+                <div class="col-md-2">
+                    <label class="fw-bold">Balance</label>
+                    <input class="form-control text-danger fw-bold"
+                           [value]="invoice.balanceAmount"
+                           readonly>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <!-- Payment Form -->
+
+            <form [formGroup]="paymentForm">
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <label>Payment Date</label>
+                        <input
+                                type="date"
+                                class="form-control"
+                                formControlName="paymentDate">
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Payment Mode</label>
+
+                        <select class="form-select"
+                                formControlName="paymentMode">
+
+                            <option value="">Select</option>
+                            <option>Cash</option>
+                            <option>UPI</option>
+                            <option>Bank Transfer</option>
+                            <option>Cheque</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Amount</label>
+
+                        <input type="number"
+                               class="form-control"
+                               formControlName="amount">
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <label>Reference No</label>
+
+                        <input class="form-control"
+                               formControlName="transactionReference">
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-3">
+
+                    <div class="col-md-12">
+
+                        <label>Remarks</label>
+
+                        <textarea class="form-control"
+                                  rows="2"
+                                  formControlName="remarks">
+                        </textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-4">
+
+                    <button class="btn btn-success me-2"
+                            (click)="savePayment()"
+                            [disabled]="paymentForm.invalid">
+
+                        Save Payment
+
+                    </button>
+
+                    <button class="btn btn-secondary"
+                            routerLink="/invoice/list">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+            </form>
+
+            <hr>
+
+            <!-- Payment History -->
+
+            <h5>Payment History</h5>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-light">
+
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Mode</th>
+                    <th>Amount</th>
+                    <th>Reference</th>
+                    <th>Remarks</th>
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr *ngFor="let payment of paymentHistory; let i=index">
+
+                    <td>{{i+1}}</td>
+
+                    <td>{{payment.paymentDate}}</td>
+
+                    <td>{{payment.paymentMode}}</td>
+
+                    <td class="text-end">
+                        {{payment.amount | currency:'INR'}}
+                    </td>
+
+                    <td>{{payment.transactionReference}}</td>
+
+                    <td>{{payment.remarks}}</td>
+
+                </tr>
+
+                <tr *ngIf="paymentHistory.length==0">
+
+                    <td colspan="6"
+                        class="text-center text-muted">
+
+                        No Payments Found
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

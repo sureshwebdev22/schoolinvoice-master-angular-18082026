@@ -1,0 +1,232 @@
+<div
+class="offcanvas-lg offcanvas-start sidebar bg-light"
+tabindex="-1"
+id="sidebar">
+
+<div class="offcanvas-header">
+
+<h5>Menu</h5>
+
+<button
+class="btn-close btn-close-white"
+data-bs-dismiss="offcanvas">
+</button>
+
+</div>
+
+<div class="offcanvas-body p-0">
+
+<ul class="nav flex-column">
+
+<li class="nav-item">
+<a routerLink="/dashboard" class="nav-link">
+<i class="bi bi-speedometer2"></i>
+Dashboard 
+</a>
+</li>
+
+<div *ngIf="isAdmin">
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#users">
+
+<i class="bi bi-people"></i>
+
+Parent User
+
+</a>
+
+<div class="collapse" id="users">
+
+<ul class="nav flex-column ms-4">
+
+<li>
+
+<a
+href="user/search"
+class="nav-link text-blue">
+
+Search User
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="user/create"
+class="nav-link text-blue">
+
+Create User
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+
+</li>
+</div>
+
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#student">
+
+<i class="bi bi-mortarboard"></i>
+
+Students
+
+</a>
+
+<div class="collapse" id="student">
+
+<ul class="nav flex-column ms-4">
+
+
+<li>
+
+<a
+href="/students"
+class="nav-link text-blue">
+
+Search Student
+
+</a>
+
+</li>
+<div *ngIf="isAdmin">
+<li>
+
+  
+<a
+href="student/create"
+class="nav-link text-blue">
+
+Create Student
+
+</a>
+
+</li>
+</div>
+</ul>
+
+</div>
+
+</li>
+
+
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#invoice">
+
+<i class="bi bi-receipt"></i>
+
+Invoices
+
+</a>
+
+<div class="collapse" id="invoice">
+
+<ul class="nav flex-column ms-4">
+
+<li>
+
+<a
+href="invoices/list"
+class="nav-link text-blue">
+
+Search Invoices
+
+</a>
+
+</li>
+<div *ngIf="isAdmin">
+<li>
+
+<a
+href="invoices/create"
+class="nav-link text-blue">
+
+Create Invoices
+
+</a>
+
+
+</li>
+</div>
+
+
+
+</ul>
+
+</div>
+
+</li>
+
+<li class="nav-item">
+
+<a
+class="nav-link text-blue"
+data-bs-toggle="collapse"
+href="#payments">
+
+<i class="bi bi-cash"></i>
+
+Payments
+
+</a>
+
+<div class="collapse" id="payments">
+
+<ul class="nav flex-column ms-4">
+
+<li>
+
+<a
+href="payment/list"
+class="nav-link text-blue">
+
+Search Payments
+
+</a>
+
+</li>
+
+<li>
+
+<a
+href="payment/create/27"
+class="nav-link text-blue">
+
+Create Payment
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+</div>
+
+</li>
+
+</ul>
+
+</div>
+
+</div>

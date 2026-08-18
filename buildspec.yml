@@ -1,0 +1,24 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 24
+    commands:
+      - npm install
+
+  build:
+    commands:
+      - npm run build
+
+  post_build:
+    commands:
+      - mkdir deploy
+      - cp appspec.yml deploy/
+      - cp -r scripts deploy/
+      - cp -r dist/schoolinvoice/browser/* deploy/
+
+artifacts:
+  base-directory: deploy
+  files:
+    - '**/*'

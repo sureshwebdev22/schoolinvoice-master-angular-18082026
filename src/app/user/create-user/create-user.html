@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- create-user.component.html -->
+<div class="container-fluid py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-10 col-xl-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0"><i class="bi bi-person-plus-fill"></i> Create User</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="userForm" (ngSubmit)="createUser()">
+            <div class="row g-3">
+
+              <div class="col-md-6">
+                <label class="form-label">Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control"
+                       formControlName="email"
+                       [ngClass]="{'is-invalid':f['email'].touched&&f['email'].invalid}">
+                <div class="invalid-feedback" *ngIf="f['email'].touched">
+                  <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
+                  <div *ngIf="f['email'].errors?.['email']">Enter a valid email.</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control"
+                       formControlName="password"
+                       [ngClass]="{'is-invalid':f['password'].touched&&f['password'].invalid}">
+                <div class="invalid-feedback" *ngIf="f['password'].touched">
+                  <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+                  <div *ngIf="f['password'].errors?.['minlength']">Minimum 6 characters.</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                <input class="form-control" formControlName="fullName"
+                       [ngClass]="{'is-invalid':f['fullName'].touched&&f['fullName'].invalid}">
+                <div class="invalid-feedback" *ngIf="f['fullName'].touched">Full Name is required.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Date of Birth <span class="text-danger">*</span></label>
+                <input type="date" class="form-control" formControlName="dateOfBirth"
+                       [ngClass]="{'is-invalid':f['dateOfBirth'].touched&&f['dateOfBirth'].invalid}">
+                <div class="invalid-feedback" *ngIf="f['dateOfBirth'].touched">Date of Birth is required.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Gender <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="gender"
+                        [ngClass]="{'is-invalid':f['gender'].touched&&f['gender'].invalid}">
+                  <option value="">Select Gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="f['gender'].touched">Gender is required.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Mobile Number <span class="text-danger">*</span></label>
+                <input class="form-control" formControlName="mobileNo"
+                       [ngClass]="{'is-invalid':f['mobileNo'].touched&&f['mobileNo'].invalid}">
+                <div class="invalid-feedback" *ngIf="f['mobileNo'].touched">
+                  <div *ngIf="f['mobileNo'].errors?.['required']">Mobile Number is required.</div>
+                  <div *ngIf="f['mobileNo'].errors?.['pattern']">Enter a valid 10-digit mobile number.</div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Role <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="role"
+                        [ngClass]="{'is-invalid':f['role'].touched&&f['role'].invalid}">
+                  <option value="">Select Role</option>
+                  <option value="admin">Admin</option>
+                  <option value="teacher">Teacher</option>
+                  <option value="student">Student</option>
+                  <option value="parent">Parent</option>
+                </select>
+                <div class="invalid-feedback" *ngIf="f['role'].touched">Role is required.</div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="form-label">Address <span class="text-danger">*</span></label>
+                <textarea rows="3" class="form-control" formControlName="address"
+                          [ngClass]="{'is-invalid':f['address'].touched&&f['address'].invalid}"></textarea>
+                <div class="invalid-feedback" *ngIf="f['address'].touched">Address is required.</div>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-success" type="submit">
+                <i class="bi bi-check-circle"></i> Create User
+              </button>
+              <button class="btn btn-secondary" type="button" routerLink="/users">
+                <i class="bi bi-x-circle"></i> Cancel
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

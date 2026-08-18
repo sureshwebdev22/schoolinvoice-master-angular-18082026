@@ -1,0 +1,238 @@
+<div class="container-fluid py-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-xl-10">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-receipt"></i>
+                        Student Invoice
+                    </h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form [formGroup]="invoiceForm">
+
+                        <!-- Invoice Details -->
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Invoice No</label>
+                                <input class="form-control"
+                                       formControlName="invoiceNumber">
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Invoice Date</label>
+                                <input type="date"
+                                       class="form-control"
+                                       formControlName="invoiceDate">
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Due Date</label>
+                                <input type="date"
+                                       class="form-control"
+                                       formControlName="dueDate">
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <h5 class="text-primary">
+                            Student Details
+                        </h5>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Admission No</label>
+                                <input class="form-control"
+                                       formControlName="admissionNo">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Student Name</label>
+                                <input class="form-control"
+                                       formControlName="studentName">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Class</label>
+                                <input class="form-control"
+                                       formControlName="className">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+
+                                <label class="form-label">
+                                    Parent
+                                </label>
+
+                                <div class="input-group">
+
+                                    <input class="form-control"
+                                           formControlName="parentName">
+
+                                    <button
+                                        class="btn btn-outline-primary"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#studentSearchModal">
+
+                                        <i class="bi bi-search"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <h5 class="text-primary">
+                            Fee Details
+                        </h5>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-hover align-middle"
+                                   formArrayName="invoiceItems">
+
+                                <thead class="table-primary">
+
+                                <tr>
+                                    <th>Fee Type</th>
+                                    <th>Amount</th>
+                                    <th>Discount</th>
+                                    <th>Total</th>
+                                </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                <tr
+                                    *ngFor="let item of invoiceItems.controls; let i=index"
+                                    [formGroupName]="i">
+
+                                    <td>
+                                        <input class="form-control"
+                                               formControlName="feeType"
+                                               readonly>
+                                    </td>
+
+                                    <td>
+                                        <input class="form-control"
+                                               formControlName="amount"
+                                               readonly>
+                                    </td>
+
+                                    <td>
+                                        <input class="form-control"
+                                               value="0"
+                                               readonly>
+                                    </td>
+
+                                    <td>
+                                        <input class="form-control"
+                                               [value]="item.get('amount')?.value"
+                                               readonly>
+                                    </td>
+
+                                </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-lg-8">
+
+                                <label class="form-label">
+                                    Remarks
+                                </label>
+
+                                <textarea
+                                    rows="4"
+                                    class="form-control"
+                                    formControlName="remarks">
+                                </textarea>
+
+                            </div>
+
+                            <div class="col-12 col-lg-4">
+
+                                <div class="card bg-light border-primary">
+
+                                    <div class="card-body text-center">
+
+                                        <h6>Total Amount</h6>
+
+                                        <h2 class="text-success">
+
+                                            
+
+                                        </h2>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                            <button
+                                *ngIf="isAdmin || isParent"
+                                class="btn btn-success"
+                                type="button"
+                                (click)="isAdmin ? createInvoice() : makePayment()">
+
+                                <i class="bi bi-check-circle"></i>
+
+                                {{ isAdmin ? 'Create Invoice' : 'Make Payment' }}
+
+                            </button>
+
+                            <button
+                                class="btn btn-secondary"
+                                type="button"
+                                (click)="cancelInvoice()">
+
+                                <i class="bi bi-x-circle"></i>
+
+                                Cancel
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

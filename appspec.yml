@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+
+files:
+  - source: /
+    destination: /home/ec2-user/angular
+
+hooks:
+  BeforeInstall:
+    - location: scripts/before_install.sh
+
+  AfterInstall:
+    - location: scripts/after_install.sh
+
+  ApplicationStart:
+    - location: scripts/start_nginx.sh
+  
+  ApplicationStop:
+    - location: scripts/stop_nginx.sh

@@ -1,0 +1,195 @@
+<div class="container-fluid py-4">
+
+    <div class="card shadow">
+
+        <!-- Header -->
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-people-fill"></i>
+                User Management
+            </h4>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Search Form -->
+            <form [formGroup]="userSearchForm">
+
+                <div class="row g-3 align-items-end mb-4">
+                    
+                    <div class="col-12 col-lg-2">
+                        <button
+                            type="button"
+                            class="btn btn-success w-100"
+                            (click)="usercreate()">
+
+                            <i class="bi bi-plus-circle"></i>
+                            Create User
+
+                        </button>
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        </div>
+
+                    <div class="col-12 col-lg-4">
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="searchText"
+                            placeholder="Search by Name, Email or Mobile">
+
+                    </div>
+
+                    <div class="col-12 col-lg-2">
+
+                        <button
+                            type="button"
+                            class="btn btn-primary w-100"
+                            (click)="searchUsers()">
+
+                            <i class="bi bi-search"></i>
+                            Search
+
+                        </button>
+
+                    </div>
+                  
+
+                </div>
+
+            </form>
+
+            <!-- Loading -->
+
+            <div *ngIf="loading" class="text-center py-5">
+
+                <div class="spinner-border text-primary"></div>
+
+                <div class="mt-2">
+                    Loading Users...
+                </div>
+
+            </div>
+
+            <!-- Table -->
+
+            <div class="table-responsive" *ngIf="!loading">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-primary">
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Full Name</th>
+                            <th>Gender</th>
+                            <th>Mobile No</th>
+                            <th>Role</th>
+                            <th width="170">Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let user of users">
+
+                            <td>{{user.id}}</td>
+
+                            <td>{{user.email}}</td>
+
+                            <td>{{user.fullName}}</td>
+
+                            <td>{{user.gender}}</td>
+
+                            <td>{{user.mobileNo}}</td>
+
+                            <td>
+
+                                <span
+                                    class="badge"
+                                    [ngClass]="{
+                                      'bg-danger': user.role=='ADMIN',
+                                      'bg-success': user.role=='PARENT'
+                                    }">
+
+                                    {{user.role}}
+
+                                </span>
+
+                            </td>
+
+                            <td class="text-nowrap">
+
+                                <button
+                                    class="btn btn-sm btn-outline-warning me-2"
+                                    type="button"
+                                    (click)="editUser(user.id)"
+                                    title="Edit">
+
+                                    <i class="bi bi-pencil-square"></i>
+
+                                </button>
+
+                                <button
+                                    class="btn btn-sm btn-outline-danger"
+                                    type="button"
+                                    (click)="deleteUser(user.id)"
+                                    title="Delete">
+
+                                    <i class="bi bi-trash"></i>
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- Pagination -->
+
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-3">
+
+                <button
+                    class="btn btn-secondary mb-2 mb-md-0"
+                    [disabled]="page==0"
+                    (click)="previousPage()">
+
+                    <i class="bi bi-arrow-left"></i>
+
+                    Previous
+
+                </button>
+
+                <span class="fw-bold mb-2 mb-md-0">
+
+                    Page {{page + 1}} of {{totalPages}}
+
+                </span>
+
+                <button
+                    class="btn btn-secondary"
+                    (click)="nextPage()">
+
+                    Next
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

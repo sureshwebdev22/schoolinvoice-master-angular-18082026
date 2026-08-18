@@ -1,0 +1,28 @@
+<div class="wrapper">
+
+    <!-- Header -->
+    <app-header></app-header>
+
+    <div class="main-container">
+
+        <!-- Sidebar -->
+         <div *ngIf="isLoggedIn()" >
+        <app-nav-bar ></app-nav-bar>
+        </div>
+
+        <!-- Content -->
+        <main class="content">
+
+            <div class="container-fluid p-3">
+                 <app-alert ></app-alert> 
+                <router-outlet></router-outlet>
+            </div>
+
+        </main>
+
+    </div>
+
+    <!-- Footer -->
+    <app-footer></app-footer>
+
+</div>

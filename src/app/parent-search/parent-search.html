@@ -1,0 +1,86 @@
+<div class="container mt-4">
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Search Parent</h3>
+        </div>
+
+        <div class="card-body">
+            <form [formGroup]="parentSearchForm" (ngSubmit)="searchParents()">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="mb-3 form-group">
+                            <label class="form-label">Father Name</label>
+                            <input type="text" class="form-control" formControlName="fatherName">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3 form-group">
+                            <label class="form-label">Mother Name</label>
+                            <input type="text" class="form-control" formControlName="motherName">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3 form-group">
+                            <label class="form-label">Address</label>
+                            <input type="text" class="form-control" formControlName="address">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-success" type="submit">
+                    <i class="bi bi-search"></i> Search
+                </button>
+
+                <button class="btn btn-secondary ms-2" routerLink="/students">
+                    Cancel
+                </button>
+            </form>
+        </div>
+        <div *ngIf="loading" class="text-center my-3">
+            <div class="spinner-border text-primary" role="status"></div>
+            <p class="mt-2">Loading...</p>
+        </div>
+        <table class="table table-bordered" *ngIf="!loading">
+            <thead>
+                <tr>
+                    <th>Father Name</th>
+                    <th>Mother Name</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let parent of parents">
+                    <td>{{ parent.fatherName }}</td>
+                    <td>{{ parent.motherName }}</td>
+                    <td>{{ parent.address }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between">
+
+            <button class="btn btn-secondary" (click)="previousPage()" *ngIf="!previousPages">
+                Previous
+            </button>
+
+            <span>
+                Page {{page + 1}} of {{totalPages}}
+            </span>
+
+            <button class="btn btn-secondary" (click)="nextPage()" *ngIf="!lastPages">
+                Next
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+</div>

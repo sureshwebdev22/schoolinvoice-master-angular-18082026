@@ -1,0 +1,133 @@
+<form [formGroup]="invoiceSearchForm" >
+<div class="row mb-3 mt-3 align-items-center">
+  <div class="col-md-6">
+    <button
+      class="btn btn-success"
+      (click)="createInvoice()">
+      <i class="bi bi-plus-circle"></i> Create Invoice
+    </button>
+  </div>
+    
+  <div class="col-md-4">
+    <input
+      type="text"
+      class="form-control"
+      formControlName="searchText"
+      placeholder="Search Invoice">
+  </div>
+
+  <div class="col-md-2">
+    <button
+      class="btn btn-primary"
+       (click)="searchInvoices()">
+      Search
+    </button>
+  </div>
+
+</div>
+</form>
+
+        <div *ngIf="loading" class="text-center my-3">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p class="mt-2">Loading...</p>
+        </div>
+
+        
+
+<table *ngIf="!loading" class="table table-striped mb-3">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Invoice No</th>
+      <th>Invoice Date</th>
+      <th>Due Date</th>
+      <th>Student Id</th>
+      <th>Invoice Items</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let i of invoices">
+
+      <td>{{i.invoiceID}}</td>
+      <td>{{i.invoiceNumber}}</td>
+      <td>{{i.invoiceDate | date}}</td>
+      <td>{{i.dueDate | date}}</td>
+      <td><a href="/view-student/{{i.studentId}}">{{i.studentId}}</a></td>
+      
+            <td class="position-relative"
+                (click)="hoverInvoice = i"
+                (mouseleave)="hoverInvoice = null">
+
+                <span class="text-primary" style="cursor:pointer">
+                    View Items ({{i.invoiceItems.length}})
+                </span>
+
+                <div class="invoice-popup"
+                     *ngIf="hoverInvoice === i">
+
+                    <table class="table table-sm table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th>Fee Type</th>
+                                <th>Discount</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let item of i.invoiceItems">
+                                <td>{{item.feeType}}</td>
+                                <td>{{item.discount}}</td>
+                                <td>{{item.amount | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </td>
+            <td class="text-nowrap">
+        <button class="btn btn-sm btn-outline-primary me-1" title="View" (click)="viewInvoice(i.invoiceID)">
+          <i class="bi bi-eye"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-success me-1" title="Add">
+          <i class="bi bi-plus-circle"></i>
+        </button>
+
+        <button class="btn btn-sm btn-outline-warning me-1" title="Edit" (click)="editInvoice(i.invoiceID)">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+
+      <button class="btn btn-sm btn-outline-danger" title="Delete">
+  <i class="bi bi-trash3"></i>
+</button>
+      </td>
+
+    </tr>
+  </tbody>
+
+</table>
+
+<div class="d-flex justify-content-between">
+
+  <button
+    class="btn btn-secondary"
+    (click)="previousPage()">
+    Previous
+  </button>
+
+  <span>
+    Page {{page + 1}} of {{totalPages}}
+  </span>
+
+  <button
+    class="btn btn-secondary"
+    (click)="nextPage()">
+    Next
+  </button>
+
+</div>

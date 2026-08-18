@@ -1,0 +1,301 @@
+<div class="container-fluid py-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-xl-10">
+
+            <div class="card shadow-lg">
+
+                <!-- Header -->
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-receipt"></i>
+                        Create Student Invoice
+                    </h4>
+                </div>
+
+                <!-- Body -->
+                <div class="card-body">
+
+                    <form [formGroup]="invoiceForm">
+
+                        <!-- Invoice Details -->
+                        <h5 class="text-primary mb-3">Invoice Details</h5>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Invoice No</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="invoiceNumber">
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Invoice Date</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    formControlName="invoiceDate">
+                            </div>
+
+                            <div class="col-12 col-md-4">
+                                <label class="form-label">Due Date</label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    formControlName="dueDate">
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Student Details -->
+                        <h5 class="text-primary mb-3">Student Details</h5>
+
+                        <div class="row g-3">
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Admission No</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="admissionNo">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Student Name</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="studentName">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <label class="form-label">Class</label>
+                                <input
+                                    class="form-control"
+                                    formControlName="className">
+                            </div>
+
+                            <div class="col-12 col-md-3">
+
+                                <label class="form-label">Parent</label>
+
+                                <div class="input-group">
+
+                                    <input
+                                        class="form-control"
+                                        formControlName="parentName"
+                                        readonly>
+
+                                    <input
+                                        type="hidden"
+                                        formControlName="parentId">
+
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#studentSearchModal">
+
+                                        <i class="bi bi-search"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Fee Details -->
+                        <h5 class="text-primary mb-3">Fee Details</h5>
+
+                        <div class="table-responsive">
+
+                            <table
+                                class="table table-bordered table-hover align-middle"
+                                formArrayName="invoiceItems">
+
+                                <thead class="table-primary">
+
+                                    <tr>
+                                        <th>Fee Type</th>
+                                        <th>Amount</th>
+                                        <th>Discount</th>
+                                        <th>Total</th>
+                                        <th width="80">Action</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    <tr
+                                        *ngFor="let item of invoiceItems.controls; let i=index"
+                                        [formGroupName]="i">
+
+                                        <td>
+                                            <select
+                                                class="form-select"
+                                                formControlName="feeType">
+
+                                                <option value="">Select</option>
+
+                                                <option
+                                                    *ngFor="let fee of feeTypes"
+                                                    [value]="fee">
+
+                                                    {{fee}}
+
+                                                </option>
+
+                                            </select>
+                                        </td>
+
+                                        <td>
+                                            <input
+                                                class="form-control"
+                                                type="number"
+                                                formControlName="amount"
+                                                (input)="calculateTotal()">
+                                        </td>
+
+                                        <td>
+                                            <input
+                                                class="form-control"
+                                                type="number"
+                                                formControlName="discount"
+                                                (input)="calculateTotal()">
+                                        </td>
+
+                                        <td>
+                                            <input
+                                                class="form-control"
+                                                formControlName="total"
+                                                readonly>
+                                        </td>
+
+                                        <td class="text-center">
+
+                                            <button
+                                                class="btn btn-sm btn-outline-danger"
+                                                type="button"
+                                                (click)="removeFeeItem(i)">
+
+                                                <i class="bi bi-trash"></i>
+
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="text-end">
+
+                            <button
+                                class="btn btn-success"
+                                type="button"
+                                (click)="addFeeItem()">
+
+                                <i class="bi bi-plus-circle"></i>
+
+                                Add Fee
+
+                            </button>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Remarks & Total -->
+                        <div class="row g-3">
+
+                            <div class="col-12 col-lg-8">
+
+                                <label class="form-label">Remarks</label>
+
+                                <textarea
+                                    rows="4"
+                                    class="form-control"
+                                    formControlName="remarks">
+                                </textarea>
+
+                            </div>
+
+                            <div class="col-12 col-lg-4">
+
+                                <div class="card border-success">
+
+                                    <div class="card-body text-center">
+
+                                        <h6 class="text-muted">
+                                            Grand Total
+                                        </h6>
+
+                                        <h2 class="text-success">
+
+                                            ₹ {{grandTotal}}
+
+                                        </h2>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <!-- Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                            <button
+                                *ngIf="isAdmin || isParent"
+                                class="btn btn-success"
+                                type="button"
+                                (click)="isAdmin ? saveInvoice() : makePayment()">
+
+                                <i class="bi bi-check-circle"></i>
+
+                                {{ isAdmin ? 'Add Invoice' : 'Make Payment' }}
+
+                            </button>
+
+                            <button
+                                class="btn btn-secondary"
+                                type="button">
+
+                                <i class="bi bi-x-circle"></i>
+
+                                Cancel
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-modal-student-search
+    (studentSelected)="onStudentSelected($event)">
+</app-modal-student-search>

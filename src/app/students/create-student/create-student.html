@@ -1,0 +1,252 @@
+<div class="container py-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-10">
+
+            <div class="card shadow">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="bi bi-person-plus-fill"></i>
+                        Create Student
+                    </h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form [formGroup]="studentForm" (ngSubmit)="createStudent()">
+
+                        <div class="row g-3">
+
+                            <!-- Admission No -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Admission No <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="admissionNo"
+                                    [ngClass]="{'is-invalid': f['admissionNo'].touched && f['admissionNo'].invalid}">
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['admissionNo'].touched && f['admissionNo'].errors?.['required']">
+                                    Admission Number is required.
+                                </div>
+
+                            </div>
+
+                            <!-- First Name -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    First Name <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="firstName"
+                                    [ngClass]="{'is-invalid': f['firstName'].touched && f['firstName'].invalid}">
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['firstName'].touched && f['firstName'].errors?.['required']">
+                                    First Name is required.
+                                </div>
+
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Last Name <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="lastName"
+                                    [ngClass]="{'is-invalid': f['lastName'].touched && f['lastName'].invalid}">
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['lastName'].touched && f['lastName'].errors?.['required']">
+                                    Last Name is required.
+                                </div>
+
+                            </div>
+
+                            <!-- Gender -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Gender <span class="text-danger">*</span>
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    formControlName="gender"
+                                    [ngClass]="{'is-invalid': f['gender'].touched && f['gender'].invalid}">
+
+                                    <option value="">Select Gender</option>
+                                    <option value="M">Male</option>
+                                    <option value="F">Female</option>
+
+                                </select>
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['gender'].touched && f['gender'].errors?.['required']">
+                                    Gender is required.
+                                </div>
+
+                            </div>
+
+                            <!-- Class -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Class <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="className"
+                                    [ngClass]="{'is-invalid': f['className'].touched && f['className'].invalid}">
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['className'].touched && f['className'].errors?.['required']">
+                                    Class is required.
+                                </div>
+
+                            </div>
+
+                            <!-- Section -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Section <span class="text-danger">*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    formControlName="sectionName"
+                                    [ngClass]="{'is-invalid': f['sectionName'].touched && f['sectionName'].invalid}">
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['sectionName'].touched && f['sectionName'].errors?.['required']">
+                                    Section is required.
+                                </div>
+
+                            </div>
+
+                            <!-- Status -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Status <span class="text-danger">*</span>
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    formControlName="status"
+                                    [ngClass]="{'is-invalid': f['status'].touched && f['status'].invalid}">
+
+                                    <option value="">Select Status</option>
+                                    <option value="ACTIVE">Active</option>
+                                    <option value="INACTIVE">Inactive</option>
+
+                                </select>
+
+                                <div class="invalid-feedback"
+                                     *ngIf="f['status'].touched && f['status'].errors?.['required']">
+                                    Status is required.
+                                </div>
+
+                            </div>
+
+                            <!-- Parent -->
+                            <div class="col-12 col-md-6">
+
+                                <label class="form-label">
+                                    Parent <span class="text-danger">*</span>
+                                </label>
+
+                                <div class="input-group">
+
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        formControlName="parentName"
+                                        readonly
+                                        [ngClass]="{'is-invalid': f['parentId'].touched && f['parentId'].invalid}">
+
+                                    <input
+                                        type="hidden"
+                                        formControlName="parentId">
+
+                                    <button
+                                        class="btn btn-outline-primary"
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#parentSearchModal">
+
+                                        <i class="bi bi-search"></i>
+
+                                    </button>
+
+                                </div>
+
+                                <div class="text-danger mt-1"
+                                     *ngIf="f['parentId'].touched && f['parentId'].errors?.['required']">
+                                    Please select a parent.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+
+                            <button
+                                class="btn btn-success"
+                                type="submit">
+
+                                <i class="bi bi-check-circle"></i>
+                                Create
+
+                            </button>
+
+                            <button
+                                class="btn btn-secondary"
+                                type="button"
+                                routerLink="/students">
+
+                                <i class="bi bi-x-circle"></i>
+                                Cancel
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<app-search-parent
+    (parentSelected)="onParentSelected($event)">
+</app-search-parent>

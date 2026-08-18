@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+
+    <div class="container-fluid">
+
+        <button
+            class="btn btn-primary d-lg-none"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#sidebar">
+
+            <i class="bi bi-list fs-3"></i>
+
+        </button>
+
+        <a class="navbar-brand ms-2">
+            🎓 School Management
+        </a>
+
+        <div class="ms-auto">
+
+            <div class="dropdown">
+
+                <button
+                    class="btn btn-primary dropdown-toggle"
+                    data-bs-toggle="dropdown">
+
+                    <i class="bi bi-person-circle"></i>
+
+                    {{  fullName }}
+
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end">
+
+                    <li>
+                        <a class="dropdown-item">
+                            Profile
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item" (click)="logout()">
+                            Logout
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>

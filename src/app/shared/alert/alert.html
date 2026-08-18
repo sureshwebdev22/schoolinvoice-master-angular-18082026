@@ -1,0 +1,19 @@
+<div *ngIf="alert?.message"
+     class="alert"
+     [ngClass]="{
+        'alert-success': alert.type === 'success',
+        'alert-danger': alert.type === 'error',
+        'alert-warning': alert.type === 'warning',
+        'alert-info': alert.type === 'info'
+     }">
+
+    <span>{{ alert.message }}</span>
+
+    <button
+        type="button"
+        class="btn-close float-end"
+        aria-label="Close"
+        (click)="closeAlert()">
+    </button>
+
+</div>
